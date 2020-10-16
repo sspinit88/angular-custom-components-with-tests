@@ -1,0 +1,41 @@
+//// --- $ --- vars ---
+$white: #ffffff;
+$black: #000000;
+
+$primary: #a6c674;
+$accent: #22b2b4;
+$warn: #dd6262;
+
+$grey-light: #edece8; // фон
+$grey-middle: #939393; // disabled
+$grey-deep: #7e7e7e; // cancel
+$background: #f4f3f0;
+
+
+//// --- # --- mixins ---
+@mixin ears() {
+  &.after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50vw;
+    right: -50vw;
+    z-index: -1;
+    margin: auto;
+
+    display: block;
+    height: 100%;
+    width: 100vw;
+    background-color: inherit;
+  }
+}
+
+
+//// --- стили только для Firefox
+@mixin firefox() {
+  @-moz-document url-prefix() {
+    @content;
+  }
+}
+
+

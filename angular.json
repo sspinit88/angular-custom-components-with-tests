@@ -7,7 +7,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "styl"
+          "style": "scss"
         }
       },
       "root": "",
@@ -29,7 +29,7 @@
             ],
             "styles": [
               "./node_modules/normalize.css/normalize.css",
-              "src/styles.styl"
+              "src/styles.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -98,8 +98,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.styl"
+              "src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            },
             "scripts": []
           }
         },
@@ -129,6 +134,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "angular-custom-components-with-tests"
 }
