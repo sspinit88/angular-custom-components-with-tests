@@ -10,7 +10,7 @@ export class AppComponent
   title = 'angular-custom-components-with-tests';
 
   ngOnInit(): void {
-    console.log();
+    console.log('console');
   }
 
 }
