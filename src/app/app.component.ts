@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.styl']
 })
-export class AppComponent implements OnIinit {
+export class AppComponent {
   title = 'angular-custom-components-with-tests';
 
 }

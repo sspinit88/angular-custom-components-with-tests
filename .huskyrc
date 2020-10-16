@@ -1,8 +1,5 @@
 {
-  "husky": {
-    "hooks": {
-    "pre-commit": "ng lint",
-    "pre-push": "npm test",
-    }
+  "hooks": {
+    "pre-commit": "ng lint"
   }
 }
