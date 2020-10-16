@@ -1,6 +1,6 @@
 {
   "hooks": {
     "pre-commit": "ng lint",
-    "pre-push": "ng test --watch=false"
+    "pre-push": "ng test"
   }
 }
