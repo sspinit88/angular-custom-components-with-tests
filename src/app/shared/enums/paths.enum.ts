@@ -4,4 +4,5 @@ export enum ModulesPathsEnum {
   modalDemonstration = 'modalDemonstration',
   selectsDemonstration = 'selectsDemonstration',
   tabsDemonstration = 'tabsDemonstration',
+  home = 'home',
 }

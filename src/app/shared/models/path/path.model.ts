@@ -1,4 +1,4 @@
-import { ModulesPathsEnum } from '../../constants/paths.enum';
+import { ModulesPathsEnum } from '../../enums/paths.enum';
 
 export interface ModulesPaths {
   [ModulesPathsEnum.inputsDemonstration]: Path;
@@ -6,6 +6,7 @@ export interface ModulesPaths {
   [ModulesPathsEnum.selectsDemonstration]: Path;
   [ModulesPathsEnum.modalDemonstration]: Path;
   [ModulesPathsEnum.tabsDemonstration]: Path;
+  [ModulesPathsEnum.home]: Path;
 }
 
 export interface Path {

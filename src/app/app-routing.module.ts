@@ -2,10 +2,20 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { PATHS } from './shared/constants/paths';
-import { ModulesPathsEnum } from './shared/constants/paths.enum';
+import { ModulesPathsEnum } from './shared/enums/paths.enum';
 
 
 const routes: Routes = [
+  {
+    path: '',
+    redirectTo: PATHS[ModulesPathsEnum.home].path,
+    pathMatch: 'full',
+  },
+  {
+    path: PATHS[ModulesPathsEnum.home].path,
+    loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
+    data: { title: PATHS[ModulesPathsEnum.home].title }
+  },
   {
     path: PATHS[ModulesPathsEnum.inputsDemonstration].path,
     loadChildren: () => import('./inputs-demonstration/inputs-demonstration.module').then(m => m.InputsDemonstrationModule),
@@ -29,6 +39,11 @@ const routes: Routes = [
     path: PATHS[ModulesPathsEnum.tabsDemonstration].path,
     loadChildren: () => import('./tabs-demonstration/tabs-demonstration.module').then(m => m.TabsDemonstrationModule),
   },
+  {
+    path: '**',
+    redirectTo: PATHS[ModulesPathsEnum.home].path,
+    pathMatch: 'full',
+  }
 ];
 
 @NgModule({
