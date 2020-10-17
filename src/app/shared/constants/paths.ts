@@ -10,26 +10,26 @@ export const PATHS: ModulesPaths = {
   [ModulesPathsEnum.inputsDemonstration]: {
     idx: 2,
     path: 'inputs',
-    title: 'Inputs Demonstration',
+    title: 'Inputs',
   },
   [ModulesPathsEnum.masksDemonstration]: {
     idx: 3,
     path: 'masks',
-    title: 'Masks Demonstration',
+    title: 'Masks',
   },
   [ModulesPathsEnum.modalDemonstration]: {
     idx: 4,
     path: 'modal',
-    title: 'Modal Demonstration',
+    title: 'Modal',
   },
   [ModulesPathsEnum.selectsDemonstration]: {
     idx: 5,
     path: 'selects',
-    title: 'Selects Demonstration',
+    title: 'Selects',
   },
   [ModulesPathsEnum.tabsDemonstration]: {
     idx: 6,
     path: 'tabs',
-    title: 'Tabs Demonstration',
+    title: 'Tabs',
   },
 };

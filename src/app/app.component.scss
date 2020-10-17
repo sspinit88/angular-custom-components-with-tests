@@ -1,0 +1,27 @@
+:host {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: 96px 1fr;
+  grid-template-areas: 'header header'
+                       'navbar router-outlet'
+                       'navbar router-outlet';
+  height: 100%;
+}
+
+:host ::ng-deep {
+  .app-header {
+    grid-area: header;
+  }
+
+  .app-navigation-bar {
+    grid-area: navbar;
+  }
+
+  .router-outlet-wrapper {
+    grid-area: router-outlet;
+    overflow: auto;
+  }
+}
+
+
+

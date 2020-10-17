@@ -1,24 +1,30 @@
 @import "vars.scss";
 
 :host {
+  display: block;
+  border-right: 1px solid $grey-deep;
+  padding-top: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
+
   .nav {
     &__li {
+      display: grid;
+      align-self: center;
       list-style: none;
-      height: 50px;
+      margin-bottom: 28px;
     }
 
     &__link {
       color: $black;
-      height: 100%;
+      text-align: center;
 
       &:hover {
         color: $accent;
-        background-color: $grey-light;
       }
 
       &_active {
         color: $accent;
-        background-color: $grey-light;
       }
 
     }
