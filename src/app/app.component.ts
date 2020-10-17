@@ -7,6 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
+  headerTitle: string = 'title not transferred!';
+
+  constructor() {
+  }
+
 }
 
 

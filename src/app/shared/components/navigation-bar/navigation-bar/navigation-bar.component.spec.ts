@@ -1,9 +1,9 @@
-import { NavigationBarComponent } from './navigation-bar.component';
-import { NavigationService } from '../../../services/navigation/navigation.service';
-import { Path } from '../../../models/path/path.model';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { NavigationBarComponent } from './navigation-bar.component';
+import { NavigationService } from '../../../services/navigation/navigation.service';
+import { Path } from '../../../models/path/path.model';
 
 describe('NavigationBarComponent', () => {
 

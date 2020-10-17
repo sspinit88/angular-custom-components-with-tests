@@ -1,5 +1,9 @@
-<app-header class="app-header"></app-header>
+<app-header [title]="headerTitle"
+            class="app-header">
+</app-header>
+
 <app-navigation-bar class="app-navigation-bar"></app-navigation-bar>
+
 <div class="router-outlet-wrapper">
   <router-outlet></router-outlet>
 </div>
