@@ -2,34 +2,34 @@ import { ModulesPaths } from '../models/path/path.model';
 import { ModulesPathsEnum } from '../enums/paths.enum';
 
 export const PATHS: ModulesPaths = {
-  [ModulesPathsEnum.inputsDemonstration]: {
+  [ModulesPathsEnum.home]: {
     idx: 1,
+    path: 'home',
+    title: 'Home',
+  },
+  [ModulesPathsEnum.inputsDemonstration]: {
+    idx: 2,
     path: 'inputs',
     title: 'Inputs Demonstration',
   },
   [ModulesPathsEnum.masksDemonstration]: {
-    idx: 2,
+    idx: 3,
     path: 'masks',
     title: 'Masks Demonstration',
   },
   [ModulesPathsEnum.modalDemonstration]: {
-    idx: 3,
+    idx: 4,
     path: 'modal',
     title: 'Modal Demonstration',
   },
   [ModulesPathsEnum.selectsDemonstration]: {
-    idx: 4,
+    idx: 5,
     path: 'selects',
     title: 'Selects Demonstration',
   },
   [ModulesPathsEnum.tabsDemonstration]: {
-    idx: 5,
+    idx: 6,
     path: 'tabs',
     title: 'Tabs Demonstration',
   },
-  [ModulesPathsEnum.home]: {
-    idx: 6,
-    path: 'home',
-    title: 'Home',
-  }
 };

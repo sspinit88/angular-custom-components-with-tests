@@ -1,0 +1,27 @@
+@import "vars.scss";
+
+:host {
+  .nav {
+    &__li {
+      list-style: none;
+      height: 50px;
+    }
+
+    &__link {
+      color: $black;
+      height: 100%;
+
+      &:hover {
+        color: $accent;
+        background-color: $grey-light;
+      }
+
+      &_active {
+        color: $accent;
+        background-color: $grey-light;
+      }
+
+    }
+  }
+}
+
