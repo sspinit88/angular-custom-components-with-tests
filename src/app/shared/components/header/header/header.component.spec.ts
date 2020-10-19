@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HeaderComponent } from './header.component';
 import { By } from '@angular/platform-browser';
 
@@ -14,7 +13,6 @@ describe('HeaderComponent', () => {
         HeaderComponent,
       ],
       providers: [],
-      // schemas: [NO_ERRORS_SCHEMA],
     });
     fixture = TestBed.createComponent(HeaderComponent);
   });

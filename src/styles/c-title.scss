@@ -1,0 +1,16 @@
+@import "vars";
+
+:host {
+
+
+  .title {
+    &__page {
+      color: $primary;
+    }
+
+    &_mb {
+      margin-bottom: 24px;
+    }
+
+  }
+}

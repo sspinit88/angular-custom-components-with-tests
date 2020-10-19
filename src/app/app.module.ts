@@ -7,9 +7,10 @@ import { AppComponent } from './app.component';
 import { HeaderModule } from './shared/components/header/header.module';
 import { NavigationBarModule } from './shared/components/navigation-bar/navigation-bar.module';
 
+
 const itemModules: any[] = [
-  HeaderModule,
   NavigationBarModule,
+  HeaderModule,
 ];
 
 @NgModule({
@@ -19,7 +20,6 @@ const itemModules: any[] = [
   imports: [
     BrowserModule,
     AppRoutingModule,
-
     ...itemModules,
   ],
   providers: [],

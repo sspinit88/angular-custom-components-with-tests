@@ -1,8 +1,9 @@
-<app-header [title]="headerTitle"
+<app-header [title]="getHeaderTitle()"
             class="app-header">
 </app-header>
 
-<app-navigation-bar class="app-navigation-bar"></app-navigation-bar>
+<app-navigation-bar class="app-navigation-bar">
+</app-navigation-bar>
 
 <div class="router-outlet-wrapper">
   <router-outlet></router-outlet>
