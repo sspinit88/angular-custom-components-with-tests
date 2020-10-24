@@ -14,7 +14,8 @@
         "app",
         "el"
       ],
-      "camelCase"
+      "camelCase",
+      "kebab-case"
     ],
     "component-selector": [
       true,

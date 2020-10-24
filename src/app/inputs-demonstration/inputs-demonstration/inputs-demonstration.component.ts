@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormInterface } from 'src/app/shared/interfaces/form.interface';
+import { ElInputSettings } from '../../shared/models/el-input-settings.model';
 
 @Component({
   selector: 'app-inputs-demonstration',
@@ -13,6 +14,9 @@ export class InputsDemonstrationComponent
 
   form: FormGroup;
   isReady: boolean;
+  emailSettings: ElInputSettings = {
+    iconName: 'afAt'
+  };
 
   constructor(
     private fb: FormBuilder,

@@ -1,5 +1,5 @@
-<div *ngIf="isReady"
-     class="wrapper">
+<div
+  class="wrapper">
 
   <div class="title  title_mb">
     <h2 class="title__page  title__page_mb">
@@ -7,17 +7,20 @@
     </h2>
   </div>
 
-  <el-input></el-input>
+  <el-input>
+    <input d-el-input-ref
+           [settings]="emailSettings"
+           type="text">
+  </el-input>
 
-<!--  <form [formGroup]="form"-->
-<!--        (ngSubmit)="onSubmit()"-->
-<!--        class="c-form">-->
+  <!--  <form [formGroup]="form"-->
+  <!--        (ngSubmit)="onSubmit()"-->
+  <!--        class="c-form">-->
 
 
-
-<!--    <button class="c-form__btn">-->
-<!--      submit-->
-<!--    </button>-->
-<!--  </form>-->
+  <!--    <button class="c-form__btn">-->
+  <!--      submit-->
+  <!--    </button>-->
+  <!--  </form>-->
 
 </div>

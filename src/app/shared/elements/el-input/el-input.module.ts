@@ -4,13 +4,16 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BaseElementModule } from '../base-elements/base-element/base-element.module';
 
 import { ElInputComponent } from './el-input.component';
+import { DElInputRefDirective } from './directives/d-el-input-ref.directive';
 
 @NgModule({
   declarations: [
-    ElInputComponent
+    ElInputComponent,
+    DElInputRefDirective,
   ],
   exports: [
-    ElInputComponent
+    ElInputComponent,
+    DElInputRefDirective,
   ],
   imports: [
     CommonModule,
