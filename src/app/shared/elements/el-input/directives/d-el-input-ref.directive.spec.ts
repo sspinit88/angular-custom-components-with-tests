@@ -108,4 +108,8 @@ describe('DElInputRefDirective', () => {
     }).toThrow(new Error(OTHERS_ERROR.NaN));
   });
 
+  // it('should return string (length = 10)', () => {
+  //
+  // });
+
 });
