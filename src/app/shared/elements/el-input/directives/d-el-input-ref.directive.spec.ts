@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DElInputRefDirective } from './d-el-input-ref.directive';
 import { Component, DebugElement, ElementRef, NO_ERRORS_SCHEMA } from '@angular/core';
-import { ElInputSettings } from '../../../models/el-input-settings.model';
 import { By } from '@angular/platform-browser';
+import { ElInputSettings } from '../../../models/el-input-settings.model';
+import { OTHERS_ERROR } from '../../../constants/error-message.constants';
 
 @Component({
   selector: 'app-fake',
@@ -17,7 +18,8 @@ import { By } from '@angular/platform-browser';
 class FakeComponent {
   emailSettings: ElInputSettings = {
     iconName: 'afAt',
-    password: true
+    password: false,
+    onlyNumbers: ''
   };
 }
 
@@ -52,7 +54,7 @@ describe('DElInputRefDirective', () => {
   it('should set settings', () => {
     settings = {
       iconName: 'afAt',
-      password: true
+      password: true,
     };
     directive.settings = settings;
     const resultSettings = directive.elSettings;
@@ -71,11 +73,39 @@ describe('DElInputRefDirective', () => {
 
   it('should emit input value', (done) => {
     const testValue: string = 'test!!!';
+
     directive.currentValue.subscribe(res => {
       expect(res).toEqual(testValue);
       done();
     });
+
     directive.emitInputValue(testValue);
+  });
+
+  it('should return string with only numbers', () => {
+    const str = '';
+    const testInpValue = '1 ddd2 eee3 45 6 7 89 0 ';
+    const res: string = directive.takeOnlyNumbers(testInpValue, str);
+
+    expect(res).toContain('1234567890');
+  });
+
+  it('should return string with only numbers, length = 5', () => {
+    const str = '5,88';
+    const testInpValue = '1 ddd2 eee3 45 6 7 89 0 ';
+    const res: string = directive.takeOnlyNumbers(testInpValue, str);
+
+    expect(res).toContain('12345');
+    expect(res.length).toBe(5);
+  });
+
+  it(`should return error: ${OTHERS_ERROR.NaN}`, () => {
+    const str = 'q';
+    const testInpValue = '1 ddd2 eee3 45 6 7 89 0 ';
+
+    expect(() => {
+      directive.takeOnlyNumbers(testInpValue, str);
+    }).toThrow(new Error(OTHERS_ERROR.NaN));
   });
 
 });

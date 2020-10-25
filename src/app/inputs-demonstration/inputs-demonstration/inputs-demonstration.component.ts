@@ -14,9 +14,9 @@ export class InputsDemonstrationComponent
 
   form: FormGroup;
   isReady: boolean;
-  emailSettings: ElInputSettings = {
-    iconName: 'afAt'
-  };
+  // emailSettings: ElInputSettings = {
+  //   iconName: 'afAt'
+  // };
 
   constructor(
     private fb: FormBuilder,
