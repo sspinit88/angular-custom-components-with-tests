@@ -108,7 +108,30 @@ describe('DElInputRefDirective', () => {
     }).toThrow(new Error(OTHERS_ERROR.NaN));
   });
 
-  // it('should return string (length = 10)', () => {
+  it('should return string (length = 10)', () => {
+    const textLimit: string = '10';
+    const inputValue: string = `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores hic illum nam nulla omnis optio.`;
+    const res: string = directive.limitText(inputValue, textLimit);
+    expect(res.length).toBe(parseInt(textLimit, 10));
+  });
+
+  it('should return start string', () => {
+    const textLimit: string = '0';
+    const inputValue: string = `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores hic illum nam nulla omnis optio.`;
+    const res: string = directive.limitText(inputValue, textLimit);
+    expect(res.length).toBe(inputValue.length);
+    expect(res).toContain(inputValue);
+  });
+
+  it('should return start string (v2)', () => {
+    const textLimit: string = '';
+    const inputValue: string = `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores hic illum nam nulla omnis optio.`;
+    const res: string = directive.limitText(inputValue, textLimit);
+    expect(res.length).toBe(inputValue.length);
+    expect(res).toContain(inputValue);
+  });
+
+  // it('should ',  () => {
   //
   // });
 

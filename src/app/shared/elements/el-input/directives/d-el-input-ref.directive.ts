@@ -37,14 +37,22 @@ export class DElInputRefDirective {
 
   @HostListener('input')
   onInput() {
-    const inputValue = this.element.value.trim();
+    let inputValue: string = this.element.value.trim();
 
-    // if (
-    //   this.elSettings
-    //   && this.elSettings.onlyNumbers
-    // ) {
-    //   inputValue = this.takeOnlyNumbers(inputValue, this.settings.onlyNumbers);
-    // }
+    if (
+      this.elSettings
+      && this.elSettings.onlyNumbers
+    ) {
+      inputValue = this.takeOnlyNumbers(inputValue, this.settings.onlyNumbers);
+    }
+
+    if (
+      this.elSettings
+      && this.elSettings.textLimit
+      && Number.isInteger(parseInt(this.elSettings.textLimit, 10))
+    ) {
+      inputValue = this.limitText(inputValue, this.elSettings.textLimit);
+    }
 
     this.emitInputValue(inputValue);
   }
@@ -67,7 +75,7 @@ export class DElInputRefDirective {
     return value.replace(RE_FORMAT_NUMBER, this.emptyStr).substring(0, maxLength);
   }
 
-  limitText(inputValue: string, maxLength: string) {
+  limitText(inputValue: string, maxLength: string): string {
     if (
       !Number.isInteger(parseInt(maxLength, 10))
       && maxLength !== this.emptyStr
@@ -77,6 +85,9 @@ export class DElInputRefDirective {
 
     const limit: number = parseInt(maxLength, 10);
 
+    if (!limit) {
+      return inputValue;
+    }
     return inputValue.substring(0, limit);
   }
 
