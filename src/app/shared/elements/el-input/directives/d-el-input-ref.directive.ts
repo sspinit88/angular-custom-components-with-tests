@@ -1,12 +1,32 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import {
+  AfterContentInit,
+  Directive,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  HostListener, Injector,
+  Input,
+  Output
+} from '@angular/core';
 import { RE_FORMAT_NUMBER, RE_NO_SPACES } from '../../../constants/reg-exp.constants';
 import { ElInputSettings } from '../../../models/el-input-settings.model';
 import { OTHERS_ERROR } from '../../../constants/error-message.constants';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormControlDataExtractorDirective } from '../../../directives/form-control-data-extractor/form-control-data-extractor.directive';
 
 @Directive({
-  selector: '[d-el-input-ref]'
+  selector: '[d-el-input-ref]',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DElInputRefDirective),
+      multi: true,
+    }
+  ],
 })
-export class DElInputRefDirective {
+export class DElInputRefDirective
+  extends FormControlDataExtractorDirective
+  implements AfterContentInit {
 
   element: HTMLInputElement;
   elSettings: ElInputSettings = new ElInputSettings();
@@ -21,9 +41,15 @@ export class DElInputRefDirective {
   @Output() currentValue: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(
+    protected injector: Injector,
     private elRef: ElementRef,
   ) {
+    super(injector);
     this.element = this.elRef.nativeElement;
+  }
+
+  ngAfterContentInit(): void {
+
   }
 
   @HostListener('blur')

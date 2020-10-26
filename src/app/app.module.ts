@@ -15,7 +15,7 @@ const itemModules: any[] = [
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

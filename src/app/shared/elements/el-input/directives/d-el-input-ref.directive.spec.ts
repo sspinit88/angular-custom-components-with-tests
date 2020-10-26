@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, DebugElement, ElementRef, NO_ERRORS_SCHEMA } from '@angular/core';
+import { Component, DebugElement, ElementRef, Injector, NO_ERRORS_SCHEMA, ReflectiveInjector } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { DElInputRefDirective } from './d-el-input-ref.directive';
 import { ElInputSettings } from '../../../models/el-input-settings.model';
 import { OTHERS_ERROR } from '../../../constants/error-message.constants';
+import { FormControlDataExtractorDirective } from '../../../directives/form-control-data-extractor/form-control-data-extractor.directive';
 
 @Component({
   selector: 'app-fake',
@@ -29,7 +30,10 @@ describe('DElInputRefDirective', () => {
   let fakeComp: FakeComponent;
   let inputEl: DebugElement;
   let directive: DElInputRefDirective;
+  let controlDirective: FormControlDataExtractorDirective;
   let settings: ElInputSettings;
+  // tslint:disable-next-line
+  let injector;
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
@@ -37,13 +41,17 @@ describe('DElInputRefDirective', () => {
         DElInputRefDirective,
         FakeComponent,
       ],
+      providers: [
+        { provide: Injector, useValue: injector }
+      ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents()
       .then(() => {
         fixtureFake = TestBed.createComponent(FakeComponent);
         fakeComp = fixtureFake.componentInstance;
         inputEl = fixtureFake.debugElement.query(By.css('input'));
-        directive = new DElInputRefDirective(new ElementRef(inputEl));
+        controlDirective = new FormControlDataExtractorDirective(injector);
+        directive = new DElInputRefDirective(injector, new ElementRef(inputEl));
       });
   });
 

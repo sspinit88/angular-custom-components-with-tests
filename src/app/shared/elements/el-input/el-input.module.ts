@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { FormControlDataExtractorModule } from '../../directives/form-control-data-extractor/form-control-data-extractor.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { BaseElementModule } from '../base-elements/base-element/base-element.module';
 
 import { ElInputComponent } from './el-input.component';
 import { DElInputRefDirective } from './directives/d-el-input-ref.directive';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +20,7 @@ import { DElInputRefDirective } from './directives/d-el-input-ref.directive';
   imports: [
     CommonModule,
     FontAwesomeModule,
-    BaseElementModule,
+    FormControlDataExtractorModule,
   ]
 })
 export class ElInputModule {

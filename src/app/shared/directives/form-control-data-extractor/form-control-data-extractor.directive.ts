@@ -1,19 +1,13 @@
-import { Component, Injector } from '@angular/core';
+import { Directive, Injector } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
-import { FormControlDataExtractor } from 'src/app/shared/interfaces/form-control-data-extractor.interface';
+import { FormControlDataExtractor } from '../../interfaces/form-control-data-extractor.interface';
 
-@Component({
-  selector: 'app-base-element',
-  template: '',
+@Directive({
+  selector: '[d-form-control-data-extractor]'
 })
-export class BaseElementComponent
+export class FormControlDataExtractorDirective
   implements ControlValueAccessor,
     FormControlDataExtractor {
-
-  constructor(
-    protected injector: Injector,
-  ) {
-  }
 
   value: any = null;
   control: FormControl;
@@ -27,6 +21,10 @@ export class BaseElementComponent
   isValid: boolean;
   isInvalid: boolean;
 
+  constructor(
+    protected injector: Injector,
+  ) {
+  }
 
   updateChangeValue(): void {
     this.onChange(this.value);
