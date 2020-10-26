@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DElInputRefDirective } from './d-el-input-ref.directive';
 import { Component, DebugElement, ElementRef, NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { DElInputRefDirective } from './d-el-input-ref.directive';
 import { ElInputSettings } from '../../../models/el-input-settings.model';
 import { OTHERS_ERROR } from '../../../constants/error-message.constants';
 
@@ -131,8 +131,54 @@ describe('DElInputRefDirective', () => {
     expect(res).toContain(inputValue);
   });
 
-  // it('should ',  () => {
-  //
-  // });
+  it('should return text with length = 5 (check onInput())', () => {
+    directive.elSettings = {
+      textLimit: '5',
+    };
+
+    directive.element.value = '1234 dd dd 56 11 55 66 778 99 88 fff';
+
+    directive.onInput();
+
+    const res: string = directive.element.value;
+
+    expect(res.length).toBe(parseInt(directive.elSettings.textLimit, 10));
+    expect(directive.value.length).toBe(res.length);
+    expect(directive.value).toContain(res);
+  });
+
+  it('should return all text (check onInput())', () => {
+    directive.elSettings = {
+      textLimit: '',
+    };
+
+    const text: string = '1234 dd dd 56 11 55 66 778 99 88 fff';
+
+    directive.element.value = text;
+
+    directive.onInput();
+
+    const res: string = directive.element.value;
+
+    expect(res.length).toBe(text.length);
+    expect(directive.value.length).toBe(text.length);
+    expect(directive.value).toContain(res);
+  });
+
+  it('should return string with 5 numbers', () => {
+    directive.elSettings = {
+      onlyNumbers: '5',
+    };
+
+    directive.element.value = '1234 dd dd 56 11 55 66 778 99 88 fff';
+
+    directive.onInput();
+
+    const res: string = directive.element.value;
+
+    expect(res.length).toBe(parseInt(directive.elSettings.onlyNumbers, 10));
+    expect(Number.isInteger(parseInt(res, 10))).toBeTruthy();
+    expect(directive.value).toContain(res);
+  });
 
 });

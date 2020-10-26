@@ -9,13 +9,13 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { BaseElementComponent } from '../base-elements/base-element/base-element/base-element.component';
+import { DElInputRefDirective } from './directives/d-el-input-ref.directive';
 
 import { ICONS } from './constants/input-icons.constant';
 
 import { ElInputSettings } from '../../models/el-input-settings.model';
 import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 import { ElInputIcons } from '../../models/el-input-icon.model';
-import { DElInputRefDirective } from './directives/d-el-input-ref.directive';
 
 
 @Component({

@@ -10,6 +10,7 @@ export class DElInputRefDirective {
 
   element: HTMLInputElement;
   elSettings: ElInputSettings = new ElInputSettings();
+  value: string;
   focus: boolean;
   emptyStr: string = '';
 
@@ -43,7 +44,7 @@ export class DElInputRefDirective {
       this.elSettings
       && this.elSettings.onlyNumbers
     ) {
-      inputValue = this.takeOnlyNumbers(inputValue, this.settings.onlyNumbers);
+      inputValue = this.takeOnlyNumbers(inputValue, this.elSettings.onlyNumbers);
     }
 
     if (
@@ -53,6 +54,9 @@ export class DElInputRefDirective {
     ) {
       inputValue = this.limitText(inputValue, this.elSettings.textLimit);
     }
+
+    this.element.value = inputValue;
+    this.value = inputValue;
 
     this.emitInputValue(inputValue);
   }
