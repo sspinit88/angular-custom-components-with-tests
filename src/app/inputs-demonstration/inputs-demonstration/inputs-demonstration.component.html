@@ -7,19 +7,20 @@
     </h2>
   </div>
 
-  <el-input>
-    <input d-el-input-ref
-           type="text">
-  </el-input>
 
-  <!--  <form [formGroup]="form"-->
-  <!--        (ngSubmit)="onSubmit()"-->
-  <!--        class="c-form">-->
+  <form [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+        class="c-form">
+    <el-input>
+      <input d-el-input-ref
+             (currentValue)="currentValue($event)"
+             formControlName="name"
+             type="text">
+    </el-input>
 
-
-  <!--    <button class="c-form__btn">-->
-  <!--      submit-->
-  <!--    </button>-->
-  <!--  </form>-->
+    <button class="c-form__btn">
+      submit
+    </button>
+  </form>
 
 </div>

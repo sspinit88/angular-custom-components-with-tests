@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { FormControl, NgControl } from '@angular/forms';
 
 export interface FormControlDataExtractor {
   control: FormControl;
@@ -11,22 +11,27 @@ export interface FormControlDataExtractor {
   isValid: boolean;
   isInvalid: boolean;
 
-
   updateChangeValue(): void;
+
+  getNgControl(): NgControl;
+
+  getControl(ngControl: NgControl): FormControl;
 
   controlInit(): void;
 
-  switchIsTouched(): void;
+  switchIsTouched(control: FormControl): void;
 
-  getErrors(): void;
+  getValue(control: FormControl): void;
 
-  setIsValid(): void;
+  getErrors(control: FormControl): void;
 
-  setIsDisabled(): void;
+  setIsValid(control: FormControl): void;
 
-  setIsPending(): void;
+  setIsDisabled(control: FormControl): void;
 
-  setIsDirty(): void;
+  setIsPending(control: FormControl): void;
 
-  missingControl(): void;
+  setIsDirty(control: FormControl): void;
+
+  missingControl(control: FormControl): void;
 }

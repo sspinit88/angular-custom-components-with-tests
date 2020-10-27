@@ -1,6 +1,7 @@
 import { Directive, Injector } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 import { FormControlDataExtractor } from '../../interfaces/form-control-data-extractor.interface';
+import { OTHERS_ERROR } from '../../constants/error-message.constants';
 
 @Directive({
   selector: '[d-form-control-data-extractor]'
@@ -28,70 +29,93 @@ export class FormControlDataExtractorDirective
 
   updateChangeValue(): void {
     this.onChange(this.value);
-    this.getErrors();
-    this.setIsDisabled();
-    this.setIsValid();
-    this.setIsDirty();
-    this.setIsPending();
+    this.getErrors(this.control);
+    this.setIsDisabled(this.control);
+    this.setIsValid(this.control);
+    this.setIsDirty(this.control);
+    this.setIsPending(this.control);
+  }
+
+  getNgControl(): NgControl {
+    return this.injector.get(NgControl, null);
+  }
+
+  getControl(ngControl: NgControl): FormControl {
+    return ngControl.control as FormControl;
   }
 
   controlInit(): void {
-    const ngControl: NgControl = this.injector.get(NgControl, null);
-
-    if (ngControl) {
-      this.control = ngControl.control as FormControl;
-
-      this.switchIsTouched();
-      this.getErrors();
-      this.setIsDisabled();
-      this.setIsValid();
-      this.setIsDirty();
-      this.setIsPending();
-
-    } else {
-      throw new Error('Component is missing form control binding');
-    }
+    const ngControl: NgControl = this.getNgControl();
+    this.control = this.getControl(ngControl);
+    this.getValue(this.control);
+    this.switchIsTouched(this.control);
+    this.getErrors(this.control);
+    this.setIsDisabled(this.control);
+    this.setIsValid(this.control);
+    this.setIsDirty(this.control);
+    this.setIsPending(this.control);
   }
 
-  switchIsTouched(): void {
-    throw new Error('Method not implemented.');
-  }
-
-  getErrors(): void {
+  switchIsTouched(control: FormControl): void {
     try {
-      this.errors = this.control.errors;
+      this.isTouched = control.touched;
     } catch (e) {
-      this.missingControl();
+      this.missingControl(control);
     }
   }
 
-  setIsValid(): void {
+  getErrors(control: FormControl): void {
     try {
-      this.isInvalid = this.control.invalid;
-      this.isValid = this.control.valid;
+      this.errors = control.errors;
     } catch (e) {
-      this.missingControl();
+      this.missingControl(control);
     }
   }
 
-  setIsDisabled(): void {
-    this.missingControl();
-    this.isDisabled = this.control.disabled;
+  setIsValid(control: FormControl): void {
+    try {
+      this.isInvalid = control.invalid;
+      this.isValid = control.valid;
+    } catch (e) {
+      this.missingControl(control);
+    }
   }
 
-  setIsPending(): void {
-    this.missingControl();
-    this.isPending = this.control.pending;
+  setIsDisabled(control: FormControl): void {
+    try {
+      this.isDisabled = control.disabled;
+    } catch (e) {
+      this.missingControl(control);
+    }
   }
 
-  setIsDirty(): void {
-    this.missingControl();
-    this.isDirty = this.control.dirty;
+  setIsPending(control: FormControl): void {
+    try {
+      this.isPending = control.pending;
+    } catch (e) {
+      this.missingControl(control);
+    }
   }
 
-  missingControl(): void {
-    if (!this.control) {
-      throw new Error('Component is missing form control binding');
+  setIsDirty(control: FormControl): void {
+    try {
+      this.isDirty = control.dirty;
+    } catch (e) {
+      this.missingControl(control);
+    }
+  }
+
+  getValue(control: FormControl): void {
+    try {
+      this.value = control.value;
+    } catch (e) {
+      this.missingControl(control);
+    }
+  }
+
+  missingControl(control: FormControl): void {
+    if (!control) {
+      throw new Error(OTHERS_ERROR.componentIsMissing);
     }
   }
 
@@ -101,6 +125,7 @@ export class FormControlDataExtractorDirective
 
   onChange: any = () => {
   }
+
   onTouched: any = () => {
   }
 

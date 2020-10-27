@@ -30,7 +30,6 @@ export class DElInputRefDirective
 
   element: HTMLInputElement;
   elSettings: ElInputSettings = new ElInputSettings();
-  value: string;
   focus: boolean;
   emptyStr: string = '';
 
@@ -49,7 +48,8 @@ export class DElInputRefDirective
   }
 
   ngAfterContentInit(): void {
-
+    this.controlInit();
+    this.setStartValueToElement();
   }
 
   @HostListener('blur')
@@ -81,8 +81,8 @@ export class DElInputRefDirective
       inputValue = this.limitText(inputValue, this.elSettings.textLimit);
     }
 
-    this.element.value = inputValue;
-    this.value = inputValue;
+    this.changeElementValue(inputValue);
+    this.changeValue(inputValue);
 
     this.emitInputValue(inputValue);
   }
@@ -121,8 +121,27 @@ export class DElInputRefDirective
     return inputValue.substring(0, limit);
   }
 
+  setStartValueToElement(): void {
+    this.changeElementValue(this.value);
+    this.emitInputValue(this.value);
+  }
+
+  clearInput(): void {
+    this.changeValue(null);
+    this.changeElementValue(null);
+    this.onChange();
+  }
+
   emitInputValue(str: string): void {
     this.currentValue.emit(str);
+  }
+
+  changeElementValue(value: string): void {
+    this.element.value = value;
+  }
+
+  changeValue(value: any): void {
+    this.value = value;
   }
 
 }

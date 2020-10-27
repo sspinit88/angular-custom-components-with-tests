@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, DebugElement, ElementRef, Injector, NO_ERRORS_SCHEMA, ReflectiveInjector } from '@angular/core';
+import { Component, DebugElement, ElementRef, Injector, NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { DElInputRefDirective } from './d-el-input-ref.directive';
 import { ElInputSettings } from '../../../models/el-input-settings.model';
@@ -188,5 +188,30 @@ describe('DElInputRefDirective', () => {
     expect(Number.isInteger(parseInt(res, 10))).toBeTruthy();
     expect(directive.value).toContain(res);
   });
+
+  it('should change directive.element.value after call setStartValueToElement()', () => {
+    spyOn(directive, 'setStartValueToElement');
+    directive.setStartValueToElement();
+    expect(directive.setStartValueToElement).toHaveBeenCalled();
+  });
+
+  it('should change value', () => {
+    const test = 'test!';
+    directive.changeValue(test);
+    expect(directive.value).toContain(test);
+  });
+
+  it('should change element value', () => {
+    const test = 'test!';
+    directive.changeElementValue(test);
+    expect(directive.element.value).toContain(test);
+  });
+
+  it('should clear all input\'s value', () => {
+    directive.clearInput();
+    expect(directive.element.value).toBe(null);
+    expect(directive.value).toBe(null);
+  });
+
 
 });
