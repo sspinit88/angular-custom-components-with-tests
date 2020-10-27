@@ -1,7 +1,7 @@
 import { ComponentFixture, getTestBed, TestBed } from '@angular/core/testing';
 import { FormControlDataExtractorDirective } from './form-control-data-extractor.directive';
 import { OTHERS_ERROR } from '../../constants/error-message.constants';
-import { Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ElInputModule } from '../../elements/el-input/el-input.module';
 
@@ -55,8 +55,7 @@ describe('FormControlDataExtractorDirective', () => {
         FormsModule,
         ReactiveFormsModule,
         ElInputModule,
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
+      ]
     }).compileComponents()
       .then(() => {
         fixtureFakeComponent = TestBed.createComponent(FakeComponent);
