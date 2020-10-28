@@ -31,8 +31,8 @@ export class InputsDemonstrationComponent
   createForm(): void {
     this.form = this.fb.group({
       name: [''],
-      email: [''],
-      phone: [''],
+      // email: [''],
+      // phone: [''],
     });
 
     this.isReady = true;
@@ -42,7 +42,7 @@ export class InputsDemonstrationComponent
     if (this.form.invalid) {
       return;
     }
-    // console.log('this.form.value():', this.form.value);
+    // console.log('this.form.value():', this.form);
   }
 
   currentValue(v: string) {

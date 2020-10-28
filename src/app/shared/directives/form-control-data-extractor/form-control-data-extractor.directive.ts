@@ -27,7 +27,7 @@ export class FormControlDataExtractorDirective
   ) {
   }
 
-  updateChangeValue(): void {
+  updateChangeValue(value, control): void {
     this.onChange(this.value);
     this.getErrors(this.control);
     this.setIsDisabled(this.control);
@@ -124,10 +124,10 @@ export class FormControlDataExtractorDirective
 * */
 
   onChange: any = () => {
-  }
+  };
 
   onTouched: any = () => {
-  }
+  };
 
   writeValue(value: any): void {
     if (value !== undefined) {

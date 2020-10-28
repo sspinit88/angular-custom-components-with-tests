@@ -11,7 +11,7 @@ export interface FormControlDataExtractor {
   isValid: boolean;
   isInvalid: boolean;
 
-  updateChangeValue(): void;
+  updateChangeValue(value, control): void;
 
   getNgControl(): NgControl;
 

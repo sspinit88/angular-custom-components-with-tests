@@ -85,7 +85,6 @@ export class DElInputRefDirective
 
     this.changeElementValue(inputValue);
     this.changeValue(inputValue);
-    this.updateChangeValue();
     this.emitInputValue(inputValue);
   }
 
@@ -144,6 +143,7 @@ export class DElInputRefDirective
 
   changeValue(value: any): void {
     this.value = value;
+    this.updateChangeValue(this.value, this.control);
   }
 
 }

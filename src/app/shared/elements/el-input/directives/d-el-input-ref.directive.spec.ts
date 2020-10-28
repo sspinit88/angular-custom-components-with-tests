@@ -1,55 +1,71 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, DebugElement, ElementRef, Injector, NO_ERRORS_SCHEMA } from '@angular/core';
+import { Component, DebugElement, ElementRef, Injector, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { DElInputRefDirective } from './d-el-input-ref.directive';
 import { ElInputSettings } from '../../../models/el-input-settings.model';
 import { OTHERS_ERROR } from '../../../constants/error-message.constants';
 import { FormControlDataExtractorDirective } from '../../../directives/form-control-data-extractor/form-control-data-extractor.directive';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ElInputModule } from '../el-input.module';
 
 @Component({
   selector: 'app-fake',
   template: `
-    <el-input>
-      <input d-el-input-ref
-             [settings]="emailSettings"
-             type="text">
-    </el-input>
-  `,
+    <form [formGroup]="form"
+          class="c-form">
+      <el-input>
+        <input d-el-input-ref
+               formControlName="name"
+               type="text">
+      </el-input>
+    </form>
+  `
 })
-class FakeComponent {
-  emailSettings: ElInputSettings = {
-    iconName: 'afAt',
-    password: false,
-    onlyNumbers: ''
-  };
+class FakeComponent
+  implements OnInit {
+
+  form: FormGroup;
+
+  constructor(
+    private fb: FormBuilder,
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      name: ['test value!'],
+    });
+  }
 }
 
 describe('DElInputRefDirective', () => {
 
-  let fixtureFake: ComponentFixture<FakeComponent>;
-  let fakeComp: FakeComponent;
+  let fixtureFakeComponent: ComponentFixture<FakeComponent>;
+  let fakeComp;
   let inputEl: DebugElement;
   let directive: DElInputRefDirective;
   let controlDirective: FormControlDataExtractorDirective;
   let settings: ElInputSettings;
+  let control: FormControl;
   // tslint:disable-next-line
   let injector;
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [
-        DElInputRefDirective,
         FakeComponent,
+        DElInputRefDirective,
       ],
-      providers: [
-        { provide: Injector, useValue: injector }
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
+      imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        ElInputModule,
+      ]
     }).compileComponents()
       .then(() => {
-        fixtureFake = TestBed.createComponent(FakeComponent);
-        fakeComp = fixtureFake.componentInstance;
-        inputEl = fixtureFake.debugElement.query(By.css('input'));
+        fixtureFakeComponent = TestBed.createComponent(FakeComponent);
+        fakeComp = fixtureFakeComponent.componentInstance;
+        inputEl = fixtureFakeComponent.debugElement.query(By.css('input'));
         controlDirective = new FormControlDataExtractorDirective(injector);
         directive = new DElInputRefDirective(injector, new ElementRef(inputEl));
       });
@@ -70,6 +86,11 @@ describe('DElInputRefDirective', () => {
   });
 
   it('should change focus (onBlur)', () => {
+    fixtureFakeComponent.detectChanges();
+
+    directive.control = fakeComp.form.controls.name;
+    control = controlDirective.control;
+
     directive.onBlur();
     expect(directive.focus).toBeFalse();
   });
@@ -146,6 +167,11 @@ describe('DElInputRefDirective', () => {
 
     directive.element.value = '1234 dd dd 56 11 55 66 778 99 88 fff';
 
+    fixtureFakeComponent.detectChanges();
+
+    directive.control = fakeComp.form.controls.name;
+    control = controlDirective.control;
+
     directive.onInput();
 
     const res: string = directive.element.value;
@@ -164,6 +190,9 @@ describe('DElInputRefDirective', () => {
 
     directive.element.value = text;
 
+    fixtureFakeComponent.detectChanges();
+    directive.control = fakeComp.form.controls.name;
+
     directive.onInput();
 
     const res: string = directive.element.value;
@@ -179,6 +208,10 @@ describe('DElInputRefDirective', () => {
     };
 
     directive.element.value = '1234 dd dd 56 11 55 66 778 99 88 fff';
+
+    fixtureFakeComponent.detectChanges();
+
+    directive.control = fakeComp.form.controls.name;
 
     directive.onInput();
 
@@ -197,6 +230,11 @@ describe('DElInputRefDirective', () => {
 
   it('should change value', () => {
     const test = 'test!';
+
+    fixtureFakeComponent.detectChanges();
+
+    directive.control = fakeComp.form.controls.name;
+
     directive.changeValue(test);
     expect(directive.value).toContain(test);
   });
@@ -208,6 +246,9 @@ describe('DElInputRefDirective', () => {
   });
 
   it('should clear all input\'s value', () => {
+    fixtureFakeComponent.detectChanges();
+    directive.control = fakeComp.form.controls.name;
+
     directive.clearInput();
     expect(directive.element.value).toBe(null);
     expect(directive.value).toBe(null);
