@@ -55,6 +55,8 @@ export class DElInputRefDirective
   @HostListener('blur')
   onBlur() {
     this.focus = false;
+    this.onTouched();
+    this.switchIsTouched(this.control);
   }
 
   @HostListener('focus')
@@ -83,7 +85,7 @@ export class DElInputRefDirective
 
     this.changeElementValue(inputValue);
     this.changeValue(inputValue);
-
+    this.updateChangeValue();
     this.emitInputValue(inputValue);
   }
 

@@ -213,5 +213,4 @@ describe('DElInputRefDirective', () => {
     expect(directive.value).toBe(null);
   });
 
-
 });

@@ -26,7 +26,8 @@ export class AppComponent {
   }
 
   protected getTitle() {
-    this.router.events
+    this.router
+      .events
       .pipe(
         filter((event: any) => {
           return event instanceof NavigationEnd;
