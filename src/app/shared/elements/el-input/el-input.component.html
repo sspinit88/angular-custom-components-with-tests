@@ -1,5 +1,21 @@
-<!--<div *ngIf="getIconName() as iconName"-->
-<!--     class="icon">-->
-<!--  <fa-icon [icon]="getIcon(iconName)"></fa-icon>-->
-<!--</div>-->
-<ng-content></ng-content>
+<div class="el-control-field">
+  <div class="el-field">
+    <!--    <label *ngIf="!!label"-->
+    <!--           [ngClass]="showLabel()">-->
+    <!--      {{label}}:-->
+    <!--    </label>-->
+    <div class="el-input-field">
+      <!--<div *ngIf="getIconName() as iconName"-->
+      <!--     class="icon">-->
+      <!--  <fa-icon [icon]="getIcon(iconName)"></fa-icon>-->
+      <!--</div>-->
+
+      <ng-content></ng-content>
+
+    </div>
+  </div>
+
+  <div [ngClass]="setValidate()"
+       class="el-validation-field">
+  </div>
+</div>

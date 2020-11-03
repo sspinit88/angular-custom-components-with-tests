@@ -6,6 +6,7 @@ import {
   forwardRef,
   HostListener, Injector,
   Input,
+  OnInit,
   Output
 } from '@angular/core';
 import { RE_FORMAT_NUMBER, RE_NO_SPACES } from '../../../constants/reg-exp.constants';
@@ -26,12 +27,15 @@ import { FormControlDataExtractorDirective } from '../../../directives/form-cont
 })
 export class DElInputRefDirective
   extends FormControlDataExtractorDirective
-  implements AfterContentInit {
+  implements OnInit, AfterContentInit {
 
   element: HTMLInputElement;
   elSettings: ElInputSettings = new ElInputSettings();
-  focus: boolean;
   emptyStr: string = '';
+  hashInputType: string;
+  inputTypes = {
+    password: 'password',
+  };
 
   @Input() set settings(data: ElInputSettings) {
     this.elSettings = { ...data };
@@ -47,6 +51,10 @@ export class DElInputRefDirective
     this.element = this.elRef.nativeElement;
   }
 
+  ngOnInit(): void {
+    this.inputTypeHashing(this.element.type);
+  }
+
   ngAfterContentInit(): void {
     this.controlInit();
     this.setStartValueToElement();
@@ -54,14 +62,14 @@ export class DElInputRefDirective
 
   @HostListener('blur')
   onBlur() {
-    this.focus = false;
+    this.isFocus = false;
     this.onTouched();
     this.switchIsTouched(this.control);
   }
 
   @HostListener('focus')
   onFocus() {
-    this.focus = true;
+    this.isFocus = true;
   }
 
   @HostListener('input')
@@ -83,6 +91,7 @@ export class DElInputRefDirective
       inputValue = this.limitText(inputValue, this.elSettings.textLimit);
     }
 
+    this.onTouched();
     this.changeElementValue(inputValue);
     this.changeValue(inputValue);
     this.emitInputValue(inputValue);
@@ -144,6 +153,10 @@ export class DElInputRefDirective
   changeValue(value: any): void {
     this.value = value;
     this.updateChangeValue(this.value, this.control);
+  }
+
+  inputTypeHashing(type: string): void {
+    this.hashInputType = type;
   }
 
 }

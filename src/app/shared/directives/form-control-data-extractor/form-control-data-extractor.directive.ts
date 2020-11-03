@@ -1,5 +1,5 @@
 import { Directive, Injector } from '@angular/core';
-import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 import { FormControlDataExtractor } from '../../interfaces/form-control-data-extractor.interface';
 import { OTHERS_ERROR } from '../../constants/error-message.constants';
 
@@ -11,7 +11,7 @@ export class FormControlDataExtractorDirective
     FormControlDataExtractor {
 
   value: any = null;
-  control: FormControl;
+  control: FormControl | AbstractControl;
   errors: {};
 
   isFocus: boolean;
@@ -56,7 +56,7 @@ export class FormControlDataExtractorDirective
     this.setIsPending(this.control);
   }
 
-  switchIsTouched(control: FormControl): void {
+  switchIsTouched(control: FormControl | AbstractControl): void {
     try {
       this.isTouched = control.touched;
     } catch (e) {
@@ -64,7 +64,7 @@ export class FormControlDataExtractorDirective
     }
   }
 
-  getErrors(control: FormControl): void {
+  getErrors(control: FormControl | AbstractControl): void {
     try {
       this.errors = control.errors;
     } catch (e) {
@@ -72,7 +72,7 @@ export class FormControlDataExtractorDirective
     }
   }
 
-  setIsValid(control: FormControl): void {
+  setIsValid(control: FormControl | AbstractControl): void {
     try {
       this.isInvalid = control.invalid;
       this.isValid = control.valid;
@@ -81,7 +81,7 @@ export class FormControlDataExtractorDirective
     }
   }
 
-  setIsDisabled(control: FormControl): void {
+  setIsDisabled(control: FormControl | AbstractControl): void {
     try {
       this.isDisabled = control.disabled;
     } catch (e) {
@@ -89,7 +89,7 @@ export class FormControlDataExtractorDirective
     }
   }
 
-  setIsPending(control: FormControl): void {
+  setIsPending(control: FormControl | AbstractControl): void {
     try {
       this.isPending = control.pending;
     } catch (e) {
@@ -97,7 +97,7 @@ export class FormControlDataExtractorDirective
     }
   }
 
-  setIsDirty(control: FormControl): void {
+  setIsDirty(control: FormControl | AbstractControl): void {
     try {
       this.isDirty = control.dirty;
     } catch (e) {
@@ -105,7 +105,7 @@ export class FormControlDataExtractorDirective
     }
   }
 
-  getValue(control: FormControl): void {
+  getValue(control: FormControl | AbstractControl): void {
     try {
       this.value = control.value;
     } catch (e) {
@@ -113,7 +113,7 @@ export class FormControlDataExtractorDirective
     }
   }
 
-  missingControl(control: FormControl): void {
+  missingControl(control: FormControl | AbstractControl): void {
     if (!control) {
       throw new Error(OTHERS_ERROR.componentIsMissing);
     }

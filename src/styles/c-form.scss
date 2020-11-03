@@ -1,0 +1,11 @@
+:host {
+  .c-form {
+    &__field {
+      width: 300px;
+
+      &:last-of-type {
+        margin-bottom: 16px;
+      }
+    }
+  }
+}

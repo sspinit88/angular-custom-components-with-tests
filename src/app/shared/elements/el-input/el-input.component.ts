@@ -35,11 +35,10 @@ export class ElInputComponent
   }
 
   ngAfterContentInit(): void {
-    // console.log('this.inputElement():', this.inputElement);
   }
 
-  getIconName(): string {
-    return this.getElSettings().iconName;
+  getIconName() {
+    // return this.getElSettings().iconName;
   }
 
   getIcon(name: string): IconDefinition {
@@ -58,5 +57,26 @@ export class ElInputComponent
 
     return res;
   }
+
+  setValidate(): {} {
+    return {
+      'el-validation-field_valid': this.isElValid(),
+      'el-validation-field_invalid': this.isElInvalid(),
+      'el-validation-field_focus': this.isElFocus(),
+    };
+  }
+
+  isElValid(): boolean {
+    return this.inputDirective.isValid && !this.inputDirective.isInvalid;
+  }
+
+  isElInvalid(): boolean {
+    return !this.inputDirective.isValid && this.inputDirective.isInvalid && this.inputDirective.isTouched;
+  }
+
+  isElFocus(): boolean {
+    return this.inputDirective.isFocus;
+  }
+
 
 }

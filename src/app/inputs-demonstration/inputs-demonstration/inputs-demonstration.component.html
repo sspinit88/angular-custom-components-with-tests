@@ -11,12 +11,14 @@
   <form [formGroup]="form"
         (ngSubmit)="onSubmit()"
         class="c-form">
-    <el-input>
-      <input d-el-input-ref
-             (currentValue)="currentValue($event)"
-             formControlName="name"
-             type="text">
-    </el-input>
+    <div class="c-form__field">
+      <el-input>
+        <input d-el-input-ref
+               (currentValue)="currentValue($event)"
+               formControlName="name"
+               type="text">
+      </el-input>
+    </div>
 
     <button class="c-form__btn">
       submit

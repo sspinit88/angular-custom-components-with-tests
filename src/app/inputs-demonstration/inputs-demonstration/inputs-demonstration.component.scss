@@ -1,8 +1,15 @@
 @import "c-title";
+@import "c-form";
 
 :host {
   display: block;
   height: 100%;
   padding: 24px;
   width: 100%;
+
+  .c-form {
+    &__field {
+      width: 300px;
+    }
+  }
 }

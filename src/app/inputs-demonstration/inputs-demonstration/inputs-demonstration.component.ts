@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormInterface } from 'src/app/shared/interfaces/form.interface';
 import { ElInputSettings } from '../../shared/models/el-input-settings.model';
 
@@ -14,9 +14,9 @@ export class InputsDemonstrationComponent
 
   form: FormGroup;
   isReady: boolean;
-  // emailSettings: ElInputSettings = {
-  //   iconName: 'afAt'
-  // };
+  emailSettings: ElInputSettings = {
+    iconName: 'afAt'
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -30,7 +30,10 @@ export class InputsDemonstrationComponent
 
   createForm(): void {
     this.form = this.fb.group({
-      name: [''],
+      name: ['1', [
+        Validators.required,
+        Validators.minLength(3)]
+      ],
       // email: [''],
       // phone: [''],
     });
@@ -42,7 +45,7 @@ export class InputsDemonstrationComponent
     if (this.form.invalid) {
       return;
     }
-    // console.log('this.form.value():', this.form);
+    // console.log('this.form.value():', this.form.value);
   }
 
   currentValue(v: string) {

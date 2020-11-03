@@ -2,7 +2,7 @@ import { ComponentFixture, getTestBed, TestBed } from '@angular/core/testing';
 import { FormControlDataExtractorDirective } from './form-control-data-extractor.directive';
 import { OTHERS_ERROR } from '../../constants/error-message.constants';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ElInputModule } from '../../elements/el-input/el-input.module';
 
 
@@ -41,7 +41,7 @@ describe('FormControlDataExtractorDirective', () => {
   let fixtureFakeComponent: ComponentFixture<FakeComponent>;
   let componentInstance;
   let directive: FormControlDataExtractorDirective;
-  let control: FormControl;
+  let control: AbstractControl | FormControl;
   // tslint:disable-next-line
   let injector;
 

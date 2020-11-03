@@ -1,7 +1,7 @@
-import { FormControl, NgControl } from '@angular/forms';
+import { AbstractControl, FormControl, NgControl } from '@angular/forms';
 
 export interface FormControlDataExtractor {
-  control: FormControl;
+  control: FormControl | AbstractControl;
   errors: {};
   isFocus: boolean;
   isTouched: boolean;
@@ -15,23 +15,23 @@ export interface FormControlDataExtractor {
 
   getNgControl(): NgControl;
 
-  getControl(ngControl: NgControl): FormControl;
+  getControl(ngControl: NgControl): FormControl | AbstractControl;
 
   controlInit(): void;
 
-  switchIsTouched(control: FormControl): void;
+  switchIsTouched(control: FormControl | AbstractControl): void;
 
-  getValue(control: FormControl): void;
+  getValue(control: FormControl | AbstractControl): void;
 
-  getErrors(control: FormControl): void;
+  getErrors(control: FormControl | AbstractControl): void;
 
-  setIsValid(control: FormControl): void;
+  setIsValid(control: FormControl | AbstractControl): void;
 
-  setIsDisabled(control: FormControl): void;
+  setIsDisabled(control: FormControl | AbstractControl): void;
 
-  setIsPending(control: FormControl): void;
+  setIsPending(control: FormControl | AbstractControl): void;
 
-  setIsDirty(control: FormControl): void;
+  setIsDirty(control: FormControl | AbstractControl): void;
 
-  missingControl(control: FormControl): void;
+  missingControl(control: FormControl | AbstractControl): void;
 }

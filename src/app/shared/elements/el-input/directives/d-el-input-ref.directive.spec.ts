@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, DebugElement, ElementRef, Injector, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
+import { ComponentFixture, getTestBed, TestBed } from '@angular/core/testing';
+import { Component, DebugElement, ElementRef, OnInit } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { DElInputRefDirective } from './d-el-input-ref.directive';
 import { ElInputSettings } from '../../../models/el-input-settings.model';
 import { OTHERS_ERROR } from '../../../constants/error-message.constants';
 import { FormControlDataExtractorDirective } from '../../../directives/form-control-data-extractor/form-control-data-extractor.directive';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ElInputModule } from '../el-input.module';
 
 @Component({
@@ -41,16 +41,16 @@ class FakeComponent
 describe('DElInputRefDirective', () => {
 
   let fixtureFakeComponent: ComponentFixture<FakeComponent>;
-  let fakeComp;
+  let componentInstance;
   let inputEl: DebugElement;
   let directive: DElInputRefDirective;
   let controlDirective: FormControlDataExtractorDirective;
   let settings: ElInputSettings;
-  let control: FormControl;
+  let control: FormControl | AbstractControl;
   // tslint:disable-next-line
   let injector;
 
-  beforeEach(async () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
         FakeComponent,
@@ -61,14 +61,20 @@ describe('DElInputRefDirective', () => {
         ReactiveFormsModule,
         ElInputModule,
       ]
-    }).compileComponents()
-      .then(() => {
-        fixtureFakeComponent = TestBed.createComponent(FakeComponent);
-        fakeComp = fixtureFakeComponent.componentInstance;
-        inputEl = fixtureFakeComponent.debugElement.query(By.css('input'));
-        controlDirective = new FormControlDataExtractorDirective(injector);
-        directive = new DElInputRefDirective(injector, new ElementRef(inputEl));
-      });
+    });
+
+    fixtureFakeComponent = TestBed.createComponent(FakeComponent);
+    componentInstance = fixtureFakeComponent.componentInstance;
+    inputEl = fixtureFakeComponent.debugElement.query(By.css('input'));
+    injector = getTestBed();
+    controlDirective = new FormControlDataExtractorDirective(injector);
+    directive = new DElInputRefDirective(injector, new ElementRef(inputEl));
+  });
+
+  it('should write hashInputType', () => {
+    directive.element.type = inputEl.nativeElement.type;
+    directive.inputTypeHashing(directive.element.type);
+    expect(directive.hashInputType).toContain(inputEl.nativeElement.type);
   });
 
   it('should create directive', () => {
@@ -88,16 +94,16 @@ describe('DElInputRefDirective', () => {
   it('should change focus (onBlur)', () => {
     fixtureFakeComponent.detectChanges();
 
-    directive.control = fakeComp.form.controls.name;
-    control = controlDirective.control;
+    directive.control = componentInstance.form.controls.name;
+    control = controlDirective.control as FormControl;
 
     directive.onBlur();
-    expect(directive.focus).toBeFalse();
+    expect(directive.isFocus).toBeFalse();
   });
 
   it('should change focus (onFocus)', () => {
     directive.onFocus();
-    expect(directive.focus).toBeTruthy();
+    expect(directive.isFocus).toBeTruthy();
   });
 
   it('should emit input value', (done) => {
@@ -169,7 +175,7 @@ describe('DElInputRefDirective', () => {
 
     fixtureFakeComponent.detectChanges();
 
-    directive.control = fakeComp.form.controls.name;
+    directive.control = componentInstance.form.controls.name;
     control = controlDirective.control;
 
     directive.onInput();
@@ -191,7 +197,7 @@ describe('DElInputRefDirective', () => {
     directive.element.value = text;
 
     fixtureFakeComponent.detectChanges();
-    directive.control = fakeComp.form.controls.name;
+    directive.control = componentInstance.form.controls.name;
 
     directive.onInput();
 
@@ -211,7 +217,7 @@ describe('DElInputRefDirective', () => {
 
     fixtureFakeComponent.detectChanges();
 
-    directive.control = fakeComp.form.controls.name;
+    directive.control = componentInstance.form.controls.name;
 
     directive.onInput();
 
@@ -233,7 +239,7 @@ describe('DElInputRefDirective', () => {
 
     fixtureFakeComponent.detectChanges();
 
-    directive.control = fakeComp.form.controls.name;
+    directive.control = componentInstance.form.controls.name;
 
     directive.changeValue(test);
     expect(directive.value).toContain(test);
@@ -247,7 +253,7 @@ describe('DElInputRefDirective', () => {
 
   it('should clear all input\'s value', () => {
     fixtureFakeComponent.detectChanges();
-    directive.control = fakeComp.form.controls.name;
+    directive.control = componentInstance.form.controls.name;
 
     directive.clearInput();
     expect(directive.element.value).toBe(null);
