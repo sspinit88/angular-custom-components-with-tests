@@ -54,7 +54,7 @@ export class ElInputComponent
     return res;
   }
 
-  clearBtn(): void {
+  clearInput(): void {
     this.inputDirective.clearInput();
   }
 

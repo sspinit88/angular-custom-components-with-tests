@@ -92,7 +92,7 @@ describe('ElInputComponent', () => {
   it('should clear input after click to btn', () => {
     fixtureComponent.detectChanges();
 
-    elInpIconAndEmail.componentInstance.clearBtn();
+    elInpIconAndEmail.componentInstance.clearInput();
 
     const valueISNotExist: boolean = !!elInpIconAndEmail.componentInstance.inputDirective.value;
 
