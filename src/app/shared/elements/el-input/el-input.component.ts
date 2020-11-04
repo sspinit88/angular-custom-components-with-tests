@@ -24,6 +24,7 @@ export class ElInputComponent
     AfterContentInit {
 
   inputIcons: ElInputIcons = ICONS;
+  elSettings: ElInputSettings = null;
 
   @ContentChild(DElInputRefDirective)
   inputDirective: DElInputRefDirective;
@@ -35,10 +36,20 @@ export class ElInputComponent
   }
 
   ngAfterContentInit(): void {
+    this.elSettings = this.getElSettings();
   }
 
-  getIconName() {
-    // return this.getElSettings().iconName;
+  getIconName(): string {
+    let res: string = '';
+
+    if (
+      this.elSettings
+      && !!this.elSettings.iconName
+    ) {
+      res = this.elSettings.iconName;
+    }
+
+    return res;
   }
 
   getIcon(name: string): IconDefinition {
@@ -77,6 +88,5 @@ export class ElInputComponent
   isElFocus(): boolean {
     return this.inputDirective.isFocus;
   }
-
 
 }

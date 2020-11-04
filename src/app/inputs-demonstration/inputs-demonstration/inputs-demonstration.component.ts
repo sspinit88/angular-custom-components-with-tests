@@ -15,7 +15,7 @@ export class InputsDemonstrationComponent
   form: FormGroup;
   isReady: boolean;
   emailSettings: ElInputSettings = {
-    iconName: 'afAt'
+    iconName: 'faAt'
   };
 
   constructor(
@@ -32,9 +32,13 @@ export class InputsDemonstrationComponent
     this.form = this.fb.group({
       name: ['1', [
         Validators.required,
-        Validators.minLength(3)]
-      ],
-      // email: [''],
+        Validators.minLength(3)
+      ]],
+      email: ['', [
+        Validators.required,
+        Validators.email,
+        Validators.minLength(3),
+      ]],
       // phone: [''],
     });
 

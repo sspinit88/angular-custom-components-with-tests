@@ -7,7 +7,6 @@
     </h2>
   </div>
 
-
   <form [formGroup]="form"
         (ngSubmit)="onSubmit()"
         class="c-form">
@@ -16,6 +15,14 @@
         <input d-el-input-ref
                (currentValue)="currentValue($event)"
                formControlName="name"
+               type="text">
+      </el-input>
+    </div>
+    <div class="c-form__field">
+      <el-input>
+        <input d-el-input-ref
+               [settings]="emailSettings"
+               formControlName="email"
                type="text">
       </el-input>
     </div>

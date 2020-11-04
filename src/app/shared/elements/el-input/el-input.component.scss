@@ -54,4 +54,10 @@
       background-color: $accent;
     }
   }
+
+  .icon {
+    &::ng-deep .ng-fa-icon {
+      color: $grey-middle;
+    }
+  }
 }

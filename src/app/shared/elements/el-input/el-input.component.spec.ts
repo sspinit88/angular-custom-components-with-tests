@@ -1,11 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ICONS } from './constants/input-icons.constant';
 import { ElInputComponent } from './el-input.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { DElInputRefDirective } from './directives/d-el-input-ref.directive';
+import { ElInputSettings } from '../../models/el-input-settings.model';
 
 @Component({
   selector: 'app-fake',
@@ -19,6 +20,13 @@ import { DElInputRefDirective } from './directives/d-el-input-ref.directive';
                type="text"
                id="name">
       </el-input>
+      <el-input>
+        <input d-el-input-ref
+               [settings]="settings"
+               formControlName="icon"
+               type="text"
+               id="icon">
+      </el-input>
       <button>submit</button>
     </form>
   `
@@ -27,6 +35,9 @@ class FakeComponent
   implements OnInit {
 
   form: FormGroup;
+  settings: ElInputSettings = {
+    iconName: 'faAt'
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -39,6 +50,7 @@ class FakeComponent
         Validators.required,
         Validators.minLength(3)]
       ],
+      icon: [''],
     });
   }
 
@@ -50,6 +62,7 @@ describe('ElInputComponent', () => {
   let inputIcons;
   let fixtureComponent: ComponentFixture<FakeComponent>;
   let elInpName;
+  let elInpIcon;
 
   beforeEach(async () => {
     inputIcons = ICONS;
@@ -68,8 +81,45 @@ describe('ElInputComponent', () => {
       // schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents().then(() => {
       fixtureComponent = TestBed.createComponent(FakeComponent);
-      elInpName = fixtureComponent.debugElement.queryAll(By.directive(ElInputComponent))[0];
+
+      const inputs = fixtureComponent.debugElement.queryAll(By.directive(ElInputComponent));
+
+      elInpName = inputs[0];
+      elInpIcon = inputs[1];
+
     });
+  });
+
+  it('should not return icon name', () => {
+    fixtureComponent.detectChanges();
+
+    const controlIconName: boolean = !!elInpName.componentInstance.inputDirective.elSettings.iconName;
+    const res: boolean = !!elInpName.componentInstance.getIconName();
+    const iconNotExist: boolean = !!elInpName.nativeElement.querySelector('.icon');
+
+    expect(res).toBeFalse();
+    expect(controlIconName).toBeFalse();
+    expect(iconNotExist).toBeFalse();
+  });
+
+  it('should get iconName', () => {
+    fixtureComponent.detectChanges();
+
+    const controlIconName: string = fixtureComponent.componentInstance.settings.iconName;
+    const res: string = elInpIcon.componentInstance.getIconName();
+    const iconExist: boolean = !!elInpIcon.nativeElement.querySelector('fa-icon');
+
+    expect(res).toBe(controlIconName);
+    expect(iconExist).toBeTruthy();
+  });
+
+  it('should get elSettings', () => {
+    fixtureComponent.detectChanges();
+
+    const controlSettings: ElInputSettings = fixtureComponent.componentInstance.settings;
+    const res: ElInputSettings = elInpIcon.componentInstance.elSettings;
+
+    expect(res).toEqual(controlSettings);
   });
 
   it('should set class: "el-validation-field_invalid"', () => {
@@ -80,6 +130,7 @@ describe('ElInputComponent', () => {
     elInpName.componentInstance.inputDirective.ngAfterContentInit();
 
     const res = elInpName.componentInstance.setValidate()['el-validation-field_invalid'];
+
     expect(res).toBeTruthy();
   });
 

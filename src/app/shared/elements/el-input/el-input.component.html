@@ -5,10 +5,10 @@
     <!--      {{label}}:-->
     <!--    </label>-->
     <div class="el-input-field">
-      <!--<div *ngIf="getIconName() as iconName"-->
-      <!--     class="icon">-->
-      <!--  <fa-icon [icon]="getIcon(iconName)"></fa-icon>-->
-      <!--</div>-->
+      <div *ngIf="getIconName() as iconName"
+           class="icon">
+        <fa-icon [icon]="getIcon(iconName)"></fa-icon>
+      </div>
 
       <ng-content></ng-content>
 
