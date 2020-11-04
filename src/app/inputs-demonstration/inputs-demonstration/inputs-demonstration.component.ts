@@ -17,6 +17,8 @@ export class InputsDemonstrationComponent
   emailSettings: ElInputSettings = {
     iconName: 'faAt',
     clearBtn: true,
+    label: 'email',
+    isFloatLabel: true,
   };
 
   constructor(

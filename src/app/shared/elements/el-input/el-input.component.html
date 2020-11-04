@@ -1,9 +1,9 @@
 <div class="el-control-field">
   <div class="el-field">
-    <!--    <label *ngIf="!!label"-->
-    <!--           [ngClass]="showLabel()">-->
-    <!--      {{label}}:-->
-    <!--    </label>-->
+    <label *ngIf="getLabel() as label"
+           [ngClass]="showLabel(label)">
+      {{ label.text }}:
+    </label>
     <div class="el-input-field">
       <div *ngIf="getIconName() as iconName"
            class="icon">

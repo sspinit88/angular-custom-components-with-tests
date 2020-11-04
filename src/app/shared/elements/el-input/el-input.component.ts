@@ -9,7 +9,7 @@ import { DElInputRefDirective } from './directives/d-el-input-ref.directive';
 
 import { ICONS } from './constants/input-icons.constant';
 
-import { ElInputSettings } from '../../models/el-input-settings.model';
+import { ElInputLabel, ElInputSettings } from '../../models/el-input-settings.model';
 import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 import { ElInputIcons } from '../../models/el-input-icon.model';
 
@@ -39,6 +39,23 @@ export class ElInputComponent
 
   ngAfterContentInit(): void {
     this.elSettings = this.getElSettings();
+  }
+
+  getElSettings(): ElInputSettings {
+    let res: ElInputSettings = null;
+
+    if (
+      !!this.inputDirective
+      && !!this.inputDirective.elSettings
+    ) {
+      res = { ...this.inputDirective.elSettings };
+    }
+
+    return res;
+  }
+
+  getIcon(name: string): IconDefinition {
+    return this.inputIcons[name];
   }
 
   getIconName(): string {
@@ -71,22 +88,36 @@ export class ElInputComponent
     return res;
   }
 
-  getIcon(name: string): IconDefinition {
-    return this.inputIcons[name];
-  }
-
-  getElSettings(): ElInputSettings {
-    let res: ElInputSettings = null;
+  getLabel(): ElInputLabel {
+    let res: ElInputLabel = null;
 
     if (
-      !!this.inputDirective
-      && !!this.inputDirective.elSettings
+      this.elSettings
+      && !!this.elSettings.label
     ) {
-      res = { ...this.inputDirective.elSettings };
+      res = {
+        text: this.elSettings.label,
+        isFloat: !!this.elSettings.isFloatLabel,
+        iconExist: !!this.elSettings.iconName
+      };
     }
 
     return res;
   }
+
+  showLabel(label: ElInputLabel): {} {
+    const { text, isFloat, iconExist } = { ...label };
+
+    return {
+      'label': !!text,
+      'float-label': !!isFloat,
+      'float-label_with-left-icon': !!isFloat && !!iconExist,
+      'float-label_position-top': !!isFloat && !!this.inputDirective.isFocus,
+      'float-label_position-top-fixed': (!!isFloat && !this.inputDirective.isFocus) && !!this.inputDirective.value,
+      'float-label_left-no': !iconExist,
+    };
+  }
+
 
   setValidate(): {} {
     return {

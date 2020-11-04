@@ -25,6 +25,18 @@ import { ElInputSettings } from '../../models/el-input-settings.model';
                formControlName="iconAndEmail"
                type="text">
       </el-input>
+      <el-input>
+        <input d-el-input-ref
+               [settings]="labelSettings"
+               formControlName="label"
+               type="text">
+      </el-input>
+      <el-input>
+        <input d-el-input-ref
+               [settings]="floatSettings"
+               formControlName="labelFloat"
+               type="text">
+      </el-input>
       <button>submit</button>
     </form>
   `
@@ -35,6 +47,17 @@ class FakeComponent
   form: FormGroup;
   emailSettings: ElInputSettings = {
     iconName: 'faAt',
+    clearBtn: true,
+  };
+
+  labelSettings: ElInputSettings = {
+    label: 'какое-то поле',
+    clearBtn: true,
+  };
+
+  floatSettings: ElInputSettings = {
+    label: 'какое-то поле',
+    isFloatLabel: true,
     clearBtn: true,
   };
 
@@ -50,6 +73,8 @@ class FakeComponent
         Validators.minLength(3)]
       ],
       iconAndEmail: ['test@email.ru'],
+      label: [''],
+      labelFloat: [''],
     });
   }
 
@@ -62,6 +87,8 @@ describe('ElInputComponent', () => {
   let fixtureComponent: ComponentFixture<FakeComponent>;
   let elInpName;
   let elInpIconAndEmail;
+  let elInpLabel;
+  // let elInpFloatLabel;
 
   beforeEach(async () => {
     inputIcons = ICONS;
@@ -85,8 +112,12 @@ describe('ElInputComponent', () => {
 
       elInpName = inputs[0];
       elInpIconAndEmail = inputs[1];
-
+      elInpLabel = inputs[2];
     });
+  });
+
+  it('should ', () => {
+
   });
 
   it('should clear input after click to btn', () => {
