@@ -17,15 +17,13 @@ import { ElInputSettings } from '../../models/el-input-settings.model';
       <el-input>
         <input d-el-input-ref
                formControlName="name"
-               type="text"
-               id="name">
+               type="text">
       </el-input>
       <el-input>
         <input d-el-input-ref
-               [settings]="settings"
-               formControlName="icon"
-               type="text"
-               id="icon">
+               [settings]="emailSettings"
+               formControlName="iconAndEmail"
+               type="text">
       </el-input>
       <button>submit</button>
     </form>
@@ -35,8 +33,9 @@ class FakeComponent
   implements OnInit {
 
   form: FormGroup;
-  settings: ElInputSettings = {
-    iconName: 'faAt'
+  emailSettings: ElInputSettings = {
+    iconName: 'faAt',
+    clearBtn: true,
   };
 
   constructor(
@@ -50,7 +49,7 @@ class FakeComponent
         Validators.required,
         Validators.minLength(3)]
       ],
-      icon: [''],
+      iconAndEmail: ['test@email.ru'],
     });
   }
 
@@ -62,7 +61,7 @@ describe('ElInputComponent', () => {
   let inputIcons;
   let fixtureComponent: ComponentFixture<FakeComponent>;
   let elInpName;
-  let elInpIcon;
+  let elInpIconAndEmail;
 
   beforeEach(async () => {
     inputIcons = ICONS;
@@ -85,9 +84,35 @@ describe('ElInputComponent', () => {
       const inputs = fixtureComponent.debugElement.queryAll(By.directive(ElInputComponent));
 
       elInpName = inputs[0];
-      elInpIcon = inputs[1];
+      elInpIconAndEmail = inputs[1];
 
     });
+  });
+
+  it('should clear input after click to btn', () => {
+    fixtureComponent.detectChanges();
+
+    elInpIconAndEmail.componentInstance.clearBtn();
+
+    const valueISNotExist: boolean = !!elInpIconAndEmail.componentInstance.inputDirective.value;
+
+    expect(valueISNotExist).toBeFalse();
+  });
+
+  it('should not exist button for input clearing', () => {
+    fixtureComponent.detectChanges();
+
+    const res: boolean = !!elInpName.nativeElement.querySelector('.btn-clear');
+
+    expect(res).toBeFalse();
+  });
+
+  it('should clear btn is exist', () => {
+    fixtureComponent.detectChanges();
+
+    const res: boolean = !!elInpIconAndEmail.nativeElement.querySelector('.btn-clear');
+
+    expect(res).toBeTrue();
   });
 
   it('should not return icon name', () => {
@@ -105,9 +130,9 @@ describe('ElInputComponent', () => {
   it('should get iconName', () => {
     fixtureComponent.detectChanges();
 
-    const controlIconName: string = fixtureComponent.componentInstance.settings.iconName;
-    const res: string = elInpIcon.componentInstance.getIconName();
-    const iconExist: boolean = !!elInpIcon.nativeElement.querySelector('fa-icon');
+    const controlIconName: string = fixtureComponent.componentInstance.emailSettings.iconName;
+    const res: string = elInpIconAndEmail.componentInstance.getIconName();
+    const iconExist: boolean = !!elInpIconAndEmail.nativeElement.querySelector('fa-icon');
 
     expect(res).toBe(controlIconName);
     expect(iconExist).toBeTruthy();
@@ -116,8 +141,8 @@ describe('ElInputComponent', () => {
   it('should get elSettings', () => {
     fixtureComponent.detectChanges();
 
-    const controlSettings: ElInputSettings = fixtureComponent.componentInstance.settings;
-    const res: ElInputSettings = elInpIcon.componentInstance.elSettings;
+    const controlSettings: ElInputSettings = fixtureComponent.componentInstance.emailSettings;
+    const res: ElInputSettings = elInpIconAndEmail.componentInstance.elSettings;
 
     expect(res).toEqual(controlSettings);
   });

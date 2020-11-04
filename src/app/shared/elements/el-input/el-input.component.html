@@ -12,6 +12,12 @@
 
       <ng-content></ng-content>
 
+      <div *ngIf="clearBtnExist()"
+           class="btn-clear">
+        <fa-icon [icon]="getIcon(closeBtnIcon)"
+                 (click)="clearBtn()">
+        </fa-icon>
+      </div>
     </div>
   </div>
 

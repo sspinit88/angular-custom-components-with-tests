@@ -1,5 +1,14 @@
 import { ElInputIcons } from 'src/app/shared/models/el-input-icon.model';
-import { faAt, faUnlock, faUnlockAlt, faKey, faLock, faSign, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+import {
+  faAt,
+  faUnlock,
+  faUnlockAlt,
+  faKey,
+  faLock,
+  faSign,
+  faSignInAlt,
+  faWindowClose
+} from '@fortawesome/free-solid-svg-icons';
 
 export const ICONS: ElInputIcons = {
   faAt,
@@ -9,4 +18,5 @@ export const ICONS: ElInputIcons = {
   faLock,
   faSign,
   faSignInAlt,
+  faWindowClose,
 };

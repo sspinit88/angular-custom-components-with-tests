@@ -60,4 +60,13 @@
       color: $grey-middle;
     }
   }
+
+  .btn {
+    &-clear {
+      &::ng-deep .ng-fa-icon {
+        color: $grey-middle;
+        cursor: pointer;
+      }
+    }
+  }
 }

@@ -23,8 +23,10 @@ export class ElInputComponent
   implements OnInit,
     AfterContentInit {
 
-  inputIcons: ElInputIcons = ICONS;
   elSettings: ElInputSettings = null;
+
+  inputIcons: ElInputIcons = ICONS;
+  closeBtnIcon: string = 'faWindowClose';
 
   @ContentChild(DElInputRefDirective)
   inputDirective: DElInputRefDirective;
@@ -47,6 +49,23 @@ export class ElInputComponent
       && !!this.elSettings.iconName
     ) {
       res = this.elSettings.iconName;
+    }
+
+    return res;
+  }
+
+  clearBtn(): void {
+    this.inputDirective.clearInput();
+  }
+
+  clearBtnExist(): boolean {
+    let res: boolean = false;
+
+    if (
+      this.elSettings
+      && !!this.elSettings.clearBtn
+    ) {
+      res = true;
     }
 
     return res;

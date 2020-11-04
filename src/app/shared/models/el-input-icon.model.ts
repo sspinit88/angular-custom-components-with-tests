@@ -8,4 +8,5 @@ export interface ElInputIcons {
   faLock: IconDefinition;
   faSign: IconDefinition;
   faSignInAlt: IconDefinition;
+  faWindowClose: IconDefinition;
 }
