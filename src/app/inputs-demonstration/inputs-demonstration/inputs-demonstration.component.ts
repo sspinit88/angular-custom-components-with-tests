@@ -14,6 +14,7 @@ export class InputsDemonstrationComponent
 
   form: FormGroup;
   isReady: boolean;
+
   emailSettings: ElInputSettings = {
     iconName: 'faAt',
     clearBtn: true,

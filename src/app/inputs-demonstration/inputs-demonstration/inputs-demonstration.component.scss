@@ -10,6 +10,9 @@
   .c-form {
     &__field {
       width: 300px;
+      &_mb {
+        margin-bottom: 20px;
+      }
     }
   }
 }

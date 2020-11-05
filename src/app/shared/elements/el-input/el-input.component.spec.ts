@@ -56,7 +56,7 @@ class FakeComponent
   };
 
   floatSettings: ElInputSettings = {
-    label: 'какое-то поле',
+    label: 'label',
     isFloatLabel: true,
     clearBtn: true,
   };
@@ -88,7 +88,7 @@ describe('ElInputComponent', () => {
   let elInpName;
   let elInpIconAndEmail;
   let elInpLabel;
-  // let elInpFloatLabel;
+  let elInpFloatLabel;
 
   beforeEach(async () => {
     inputIcons = ICONS;
@@ -113,11 +113,16 @@ describe('ElInputComponent', () => {
       elInpName = inputs[0];
       elInpIconAndEmail = inputs[1];
       elInpLabel = inputs[2];
+      elInpFloatLabel = inputs[3];
     });
   });
 
-  it('should ', () => {
+  it('should return settings for label', () => {
+    fixtureComponent.detectChanges();
 
+    const label = elInpFloatLabel.componentInstance.getLabel();
+
+    expect(label).toBeTruthy();
   });
 
   it('should clear input after click to btn', () => {

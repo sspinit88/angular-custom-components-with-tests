@@ -4,6 +4,8 @@
   width: 100%;
 
   ::ng-deep input {
+    display: block;
+    text-overflow: ellipsis;
     width: 100%;
     height: 100%;
     padding: 8px 8px 8px 8px;
@@ -56,8 +58,17 @@
   }
 
   .icon {
+    display: flex;
+
     &::ng-deep .ng-fa-icon {
+      position: relative;
       color: $grey-middle;
+
+      &::after {
+        content: ':';
+        position: absolute;
+        right: -6px;
+      }
     }
   }
 
@@ -71,9 +82,10 @@
   }
 
   .label {
+    color: $grey-middle;
     font-size: 12px;
     padding: 0 8px 0 8px;
-    margin-bottom: 8px;
+    //margin-bottom: 8px;
   }
 
   .float-label {
@@ -97,13 +109,14 @@
 
   .float-label_position-top {
     top: -9px;
-    left: -2px;
+    left: -5px;
     font-size: 12px;
     opacity: .5;
   }
 
   .float-label_position-top-fixed {
     top: -9px;
+    left: -5px;
     font-size: 12px;
     opacity: .5;
   }

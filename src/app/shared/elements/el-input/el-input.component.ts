@@ -118,7 +118,6 @@ export class ElInputComponent
     };
   }
 
-
   setValidate(): {} {
     return {
       'el-validation-field_valid': this.isElValid(),
