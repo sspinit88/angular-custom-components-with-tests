@@ -15,12 +15,18 @@ export class InputsDemonstrationComponent
   form: FormGroup;
   isReady: boolean;
 
-  emailSettings: ElInputSettings = {
+  iconAndClearSettings: ElInputSettings = {
     iconName: 'faAt',
     clearBtn: true,
-    label: 'email',
+  };
+
+  floatLabelSettings: ElInputSettings = {
+    clearBtn: true,
+    label: 'label',
     isFloatLabel: true,
   };
+
+  clearInpSettings: ElInputSettings = {};
 
   constructor(
     private fb: FormBuilder,
@@ -34,26 +40,38 @@ export class InputsDemonstrationComponent
 
   createForm(): void {
     this.form = this.fb.group({
-      name: ['1', [
-        Validators.required,
-        Validators.minLength(3)
-      ]],
-      email: ['', [
-        Validators.required,
-        Validators.email,
-        Validators.minLength(3),
-      ]],
-      // phone: [''],
+      simpleInputs: this.fb.group({
+        clear: ['', [
+          Validators.required,
+          Validators.minLength(3)
+        ]],
+        floatLabel: ['', [
+          Validators.required,
+          Validators.minLength(3)
+        ]],
+        iconAndClear: ['', [
+          Validators.required,
+          Validators.email,
+          Validators.minLength(3),
+        ]],
+      }),
     });
 
     this.isReady = true;
   }
 
+  getBaseElSettings(): {} {
+    return {
+      clear: this.clearInpSettings,
+      floatLabel: this.floatLabelSettings,
+      iconAndClear: this.iconAndClearSettings,
+    };
+  }
+
   onSubmit(): void {
-    if (this.form.invalid) {
-      return;
-    }
-    // console.log('this.form.value():', this.form.value);
+    // if (this.form.invalid) {
+    //   return;
+    // }
   }
 
   currentValue(v: string) {

@@ -88,6 +88,16 @@ export class ElInputComponent
     return res;
   }
 
+  getError() {
+    if (
+      !!this.inputDirective
+      && !!this.inputDirective.errors
+    ) {
+      // console.log('errors:', this.inputDirective.errors);
+      return this.inputDirective.errors;
+    }
+  }
+
   getLabel(): ElInputLabel {
     let res: ElInputLabel = null;
 

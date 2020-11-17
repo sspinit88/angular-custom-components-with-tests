@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ElInputModule } from '../shared/elements/el-input/el-input.module';
 
 import { InputsDemonstrationComponent } from './inputs-demonstration/inputs-demonstration.component';
+import { BaseInputsComponent } from './base-inputs/base-inputs.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    InputsDemonstrationComponent
+    InputsDemonstrationComponent,
+    BaseInputsComponent
   ],
   imports: [
     CommonModule,

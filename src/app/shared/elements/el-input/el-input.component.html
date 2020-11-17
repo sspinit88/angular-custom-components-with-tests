@@ -24,4 +24,9 @@
   <div [ngClass]="setValidate()"
        class="el-validation-field">
   </div>
+
+  <div *ngIf="getError()"
+       class="">
+    Error
+  </div>
 </div>

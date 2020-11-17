@@ -23,6 +23,8 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "classlist.js": "^1.1.20150312",
+    "lodash.findlastindex": "^4.6.0",
+    "lodash.includes": "^4.3.0",
     "normalize.css": "^8.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
