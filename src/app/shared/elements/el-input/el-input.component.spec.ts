@@ -213,7 +213,7 @@ describe('ElInputComponent', () => {
     fixtureComponent.detectChanges();
 
     const isFocus = elInpName.componentInstance.setValidate()[className];
-    const res = !!elInpName.nativeElement.querySelector(`.${className}`);
+    const res = elInpName.nativeElement.querySelector(`.${className}`);
 
     expect(isFocus).toBeTruthy();
     expect(res).toBeTruthy();

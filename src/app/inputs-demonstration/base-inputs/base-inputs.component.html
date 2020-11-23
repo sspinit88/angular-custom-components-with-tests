@@ -1,0 +1,33 @@
+<fieldset [formGroup]="form">
+  <legend class="u-form-legend">
+    Base:
+  </legend>
+
+  <div formGroupName="simpleInputs">
+    <div class="c-form__field  c-form__field_mb">
+      <el-input>
+        <input d-el-input-ref
+               [settings]="clearInpSettings"
+               formControlName="clear"
+               type="text">
+      </el-input>
+    </div>
+    <div class="c-form__field  c-form__field_mb">
+      <el-input>
+        <input d-el-input-ref
+               [settings]="floatLabelSettings"
+               formControlName="floatLabel"
+               type="text">
+      </el-input>
+    </div>
+    <div class="c-form__field">
+      <el-input>
+        <input d-el-input-ref
+               [settings]="iconAndClearSettings"
+               formControlName="iconAndClear"
+               type="text">
+      </el-input>
+    </div>
+  </div>
+
+</fieldset>
